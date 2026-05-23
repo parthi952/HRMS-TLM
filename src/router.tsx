@@ -98,4 +98,9 @@ export const router = createBrowserRouter([
       </Suspense>
     )
   }
-]);
+],
+{
+    basename: "/hrm-tlm"
+  }
+
+);
