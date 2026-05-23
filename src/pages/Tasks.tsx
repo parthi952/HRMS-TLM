@@ -191,8 +191,8 @@ export const Tasks: React.FC = () => {
 
     try {
       const payload = {
-        Emp_id: assignType === "individual" ? assigneeEmpId : null,
-        Department: assignType === "department" ? managerDept : null,
+        Emp_id: assignType === "individual" ? assigneeEmpId : undefined,
+        Department: assignType === "department" ? managerDept : undefined,
         Task_Name: taskName,
         Task_Description: taskDesc,
         Start_Date: startDate || new Date().toISOString().split("T")[0],

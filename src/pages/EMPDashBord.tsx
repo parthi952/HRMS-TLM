@@ -297,7 +297,7 @@ export const EMPDashBord: React.FC = () => {
     try {
       const payload = {
         Emp_id: empIdReal,
-        Department: null,
+        Department: undefined,
         Task_Name: newTaskTitle,
         Task_Description: "Self-created task via Employee Dashboard",
         Start_Date: new Date().toISOString().split("T")[0],
