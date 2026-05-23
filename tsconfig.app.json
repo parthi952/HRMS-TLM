@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "target": "es2023",
+    "lib": ["ES2023", "DOM"],
+    "module": "esnext",
+    "types": ["vite/client"],
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["src"],
+  "exclude": [
+    "src/RoutLayout",
+    "src/Common/Calander",
+    "src/Common/CheckBox.tsx",
+    "src/Common/CustomDatePicker.tsx",
+    "src/Common/CustomTimePicker.tsx",
+    "src/Common/DocumentViewer.tsx",
+    "src/Common/ExportButton.tsx",
+    "src/Common/FormFiled.tsx",
+    "src/Common/Searchbar.tsx",
+    "src/Common/Selection.tsx",
+    "src/Common/StageFilter.tsx",
+    "src/Common/StatCard.tsx",
+    "src/Common/TextEditor.tsx",
+    "src/Common/Toggle.tsx"
+  ]
+}
