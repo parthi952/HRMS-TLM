@@ -4,9 +4,10 @@ import tailwindcss from '@tailwindcss/vite'
 
 
 export default defineConfig({
-  base: "/hrm-tlm/",
+
   plugins: [
     react(),
     tailwindcss()
   ],
+  base: "/hrm-tlm/",
 })
