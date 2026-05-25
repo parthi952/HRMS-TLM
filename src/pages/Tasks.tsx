@@ -4,6 +4,7 @@ import { useTheme } from "../ThemeContext";
 import { useUser, getCookie } from "../Context/UserContext";
 import { useUserData } from "../Context/UserData";
 import { useTasks } from "../Context/TaskContext";
+import { Api_URL } from "../APILINK";
 
 // Import premium sub-components
 import StatCard from "../Common/StatCard";
@@ -104,7 +105,7 @@ export const Tasks: React.FC = () => {
       };
 
       // Try dedicated endpoint for fetching department members first
-      const res = await fetch("http://localhost:8000/daily-tasks/team-members", { headers });
+      const res = await fetch(`${Api_URL}/daily-tasks/team-members`, { headers });
       if (res.ok) {
         const data = await res.json();
         setTeamMembers(data);
@@ -113,7 +114,7 @@ export const Tasks: React.FC = () => {
 
       // Fallback roster retrieval
       if (managerDept) {
-        const fallbackRes = await fetch("http://localhost:8000/employee/", { headers });
+        const fallbackRes = await fetch(`${Api_URL}/employee/`, { headers });
         if (fallbackRes.ok) {
           const data = await fallbackRes.json();
           const roster = data.filter(
@@ -141,7 +142,7 @@ export const Tasks: React.FC = () => {
         ...(token ? { "Authorization": `Bearer ${token}` } : {})
       };
 
-      const res = await fetch("http://localhost:8000/daily-tasks/all-reports", { headers });
+      const res = await fetch(`${Api_URL}/daily-tasks/all-reports`, { headers });
       if (res.ok) {
         const data: DailyProgressReport[] = await res.json();
         // Filter reports to department members

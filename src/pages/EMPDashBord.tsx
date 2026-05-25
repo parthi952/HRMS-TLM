@@ -15,6 +15,7 @@ import { getGlassmorphicStyle } from "../Themes/PageThemes/SideMenu";
 import { TaskItem } from "./components/TaskItem";
 import { useTasks } from "../Context/TaskContext";
 import { useUserData } from "../Context/UserData";
+import { Api_URL } from "../APILINK";
 
 export const EMPDashBord: React.FC = () => {
   const navigate = useNavigate();
@@ -118,7 +119,7 @@ export const EMPDashBord: React.FC = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [clockedIn]);
 
-  const API_BASE_URL = "http://localhost:8000";
+  const API_BASE_URL = Api_URL;
 
   const getAuthHeaders = () => {
     const token = getCookie("auth_access_token");

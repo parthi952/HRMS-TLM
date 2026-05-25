@@ -4,6 +4,7 @@ import { useTheme } from "../ThemeContext";
 import { useUserData } from "../Context/UserData";
 import { useUser } from "../Context/UserContext";
 import { usePayroll } from "../Context/PayrollContext";
+import { Api_URL } from "../APILINK";
 
 export const Payroll: React.FC = () => {
   const { currentPreset } = useTheme();
@@ -65,7 +66,7 @@ export const Payroll: React.FC = () => {
         .find(row => row.startsWith("auth_access_token="))
         ?.split("=")[1];
 
-      const response = await fetch(`http://localhost:8000/pdf/payslip/${user.empId}?month=${encodeURIComponent(monthName)}`, {
+      const response = await fetch(`${Api_URL}/pdf/payslip/${user.empId}?month=${encodeURIComponent(monthName)}`, {
         headers: {
           ...(token ? { "Authorization": `Bearer ${decodeURIComponent(token)}` } : {})
         }
@@ -97,7 +98,7 @@ export const Payroll: React.FC = () => {
         .find(row => row.startsWith("auth_access_token="))
         ?.split("=")[1];
 
-      const response = await fetch(`http://localhost:8000/pdf/payslip/${empId}/generate-and-upload?month=May%202026`, {
+      const response = await fetch(`${Api_URL}/pdf/payslip/${empId}/generate-and-upload?month=May%202026`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

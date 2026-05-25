@@ -5,6 +5,7 @@ import { useTheme } from "../ThemeContext";
 import { useUser, getCookie } from "../Context/UserContext";
 import { useUserData } from "../Context/UserData";
 import StatCard from "../Common/StatCard";
+import { Api_URL } from "../APILINK";
 
 interface LeaveHistoryEntry {
   id: number; // Leave request PK in DB
@@ -78,7 +79,7 @@ export const Leaves: React.FC = () => {
         ...(token ? { "Authorization": `Bearer ${token}` } : {})
       };
 
-      const response = await fetch(`http://localhost:8000/leave/history/${managerEmpId}`, { headers });
+      const response = await fetch(`${Api_URL}/leave/history/${managerEmpId}`, { headers });
       if (response.ok) {
         const data = await response.json();
         setMyBalances({
@@ -112,7 +113,7 @@ export const Leaves: React.FC = () => {
       };
 
       // A. Get all employees to filter department roster
-      const empRes = await fetch("http://localhost:8000/employee/", { headers });
+      const empRes = await fetch(`${Api_URL}/employee/`, { headers });
       if (!empRes.ok) throw new Error("Could not fetch corporate employees registry.");
       const allEmployees: EmployeeRecord[] = await empRes.json();
 
@@ -125,7 +126,7 @@ export const Leaves: React.FC = () => {
           );
 
       // B. Fetch all leave balances (to display team balances table)
-      const balancesRes = await fetch("http://localhost:8000/leave/all-balances", { headers });
+      const balancesRes = await fetch(`${Api_URL}/leave/all-balances`, { headers });
       if (balancesRes.ok) {
         const allBalances: TeamMemberBalance[] = await balancesRes.json();
         // Filter balances to our department roster
@@ -138,7 +139,7 @@ export const Leaves: React.FC = () => {
       // C. Query individual histories of all department members to compile active/pending leaves
       const historiesPromise = deptRoster.map(async (member) => {
         try {
-          const res = await fetch(`http://localhost:8000/leave/history/${member.Emp_id}`, { headers });
+          const res = await fetch(`${Api_URL}/leave/history/${member.Emp_id}`, { headers });
           if (res.ok) {
             const data = await res.json();
             // Stitch name & ID onto each leave history entry for identification in approvals list
@@ -189,7 +190,7 @@ export const Leaves: React.FC = () => {
   const handleUpdateStatus = async (leaveId: number, newStatus: "Approved" | "Recommended" | "Rejected") => {
     try {
       const token = getCookie("auth_access_token");
-      const response = await fetch(`http://localhost:8000/leave/update-status/${leaveId}?status=${newStatus}`, {
+      const response = await fetch(`${Api_URL}/leave/update-status/${leaveId}?status=${newStatus}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -232,7 +233,7 @@ export const Leaves: React.FC = () => {
         Reason: reason
       };
 
-      const response = await fetch("http://localhost:8000/leave/apply", {
+      const response = await fetch(`${Api_URL}/leave/apply`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

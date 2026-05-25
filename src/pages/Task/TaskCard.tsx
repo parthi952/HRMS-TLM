@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Calendar, User, ChevronDown, Loader2, Award, Users } from "lucide-react";
 import { getCookie } from "../../Context/UserContext";
+import { Api_URL } from "../../APILINK";
 
 interface AssignedTask {
   id?: number;
@@ -81,7 +82,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
         ...(token ? { Authorization: `Bearer ${token}` } : {}),
       };
 
-      const res = await fetch(`http://localhost:8000/daily-tasks/task/${taskId}/status`, {
+      const res = await fetch(`${Api_URL}/daily-tasks/task/${taskId}/status`, {
         method: "PUT",
         headers,
         body: JSON.stringify({ Status: newStatus }),
